@@ -1,0 +1,2 @@
+Full/text_to_speech filter=lfs diff=lfs merge=lfs -text
+Full/transformer_model.keras filter=lfs diff=lfs merge=lfs -text
