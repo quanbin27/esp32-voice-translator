@@ -78,20 +78,13 @@ def receive_audio():
         # Phát hiện giọng nói (nếu vượt ngưỡng năng lượng)
         if energy > recognizer.energy_threshold:
             last_voice_time = time.time()  # Cập nhật thời điểm có giọng nói
-            last_recognition_time = time.time()  # Reset thời gian nhận dạng lại
 
-        # Nếu đã im lặng > 1 giây → Nhận diện
-        if time.time() - last_voice_time > 1 and len(audio_buffer) > SAMPLE_RATE * 0.5 * 2:
-            if len(audio_buffer) > SAMPLE_RATE * 0.5 * 2:  # Đảm bảo dữ liệu đủ dài để nhận diện
+        # Nếu đã im lặng > 0.5 giây → Nhận diện
+        if time.time() - last_voice_time > 0.5:
+            if len(audio_buffer) > SAMPLE_RATE:  # Đảm bảo dữ liệu đủ dài để nhận diện
                 threading.Thread(target=transcribe_in_background, args=(audio_buffer,)).start()
-                last_recognition_time = time.time()  # Cập nhật lại thời gian nhận dạng
 
             audio_buffer = b""  # Reset buffer sau khi nhận diện
-
-        # Nếu đã im lặng trong hơn 5 giây và chưa có nhận dạng gần đây, ngừng nhận dạng
-        if time.time() - last_recognition_time > 5:
-            print("⏸️ Đã im lặng quá lâu, ngừng nhận dạng.")
-            audio_buffer = b""  # Đảm bảo không có dữ liệu cũ vẫn đang chờ xử lý
 
     stop = True
     print("🔌 Kết thúc nhận dữ liệu")
