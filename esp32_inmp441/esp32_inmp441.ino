@@ -5,9 +5,10 @@
 #define I2S_WS  15  // Word Select (WS) -> D15
 #define I2S_SCK 26  // Serial Clock (SCK) -> D26
 #define I2S_SD  33  // Serial Data (SD) -> D33
+#define LR_PIN 4  // Chọn một GPIO chưa dùng, ví dụ GPIO 4
 #define BUFFER_SIZE 512
 
-const char* ssid = "Quan";  // Thay bằng WiFi của bạn
+const char* ssid = "Gura";  // Thay bằng WiFi của bạn
 const char* password = "12345678";
 char server_ip[16];  // Địa chỉ IP của máy tính chạy server
 const uint16_t server_port = 12345;
@@ -45,7 +46,11 @@ void setupI2S() {
 
 void setup() {
   Serial.begin(115200);
-    WiFi.begin(ssid, password);
+
+  pinMode(LR_PIN, OUTPUT);
+  digitalWrite(LR_PIN, HIGH);  // Đưa L/R lên 3.3V
+
+  WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     Serial.println("Đang kết nối WiFi...");

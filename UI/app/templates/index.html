@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Dịch UI</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="translation-box">
+            <div class="box-left">
+                <div class="lang-select">
+                    <button class="active">Việt</button>
+                    <!-- <button>Anh</button>
+                <button>Nhật</button> -->
+                </div>
+                <div class="input-box">
+                    <textarea placeholder="Nhập văn bản..."></textarea>
+                </div>
+            </div>
+            <div class="box-right">
+                <div class="lang-select">
+                    <button class="active">Anh</button>
+                    <!-- <button>Việt</button>
+                <button>Nhật</button> -->
+                </div>
+                <div class="output-box">
+                    <span>Bản dịch</span>
+                </div>
+            </div>
+        </div>
+        <div class="audio-box">
+            <button id="connect-btn">Connect</button>
+            <div id="plot" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+    <script src="../static/script.js"></script>
+</body>
+
+</html>
